@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Aether Gallery, a premium hand-crafted showcase of nature, cyberpunk urban environments, space nebulae, and abstract structures. Experience responsive grids, categories, search, and a immersive lightbox.">
+  <title>Aether Gallery — Interactive Digital Art Showcase</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Ambient Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <h1 class="logo-text">AETHER<span>GALLERY</span></h1>
+    </div>
+    <p class="tagline">A curated sanctuary of digital imagery, fluid architecture, and astronomical wonders.</p>
+  </header>
+
+  <!-- Main Showcase -->
+  <main class="main-content">
+    
+    <!-- Controls (Search + Filters) -->
+    <section class="controls-section">
+      <!-- Search Input Container -->
+      <div class="search-wrapper">
+        <div class="search-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <input type="text" id="search-input" placeholder="Search artwork, tags, details..." aria-label="Search artworks">
+        <button id="clear-search" class="clear-search-btn" aria-label="Clear search" type="button">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Categories Navigation -->
+      <nav class="categories-nav" aria-label="Gallery Categories">
+        <div class="categories-wrapper">
+          <button class="category-btn active" data-category="all" id="filter-all">All Artworks</button>
+          <button class="category-btn" data-category="nature" id="filter-nature">Nature</button>
+          <button class="category-btn" data-category="urban" id="filter-urban">Urban</button>
+          <button class="category-btn" data-category="space" id="filter-space">Space</button>
+          <button class="category-btn" data-category="abstract" id="filter-abstract">Abstract</button>
+        </div>
+      </nav>
+    </section>
+
+    <!-- Gallery Grid Container -->
+    <section class="gallery-section">
+      <!-- Grid Loading State / Empty State Placeholder -->
+      <div id="no-results" class="no-results hidden">
+        <div class="no-results-icon">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+        </div>
+        <h3>No Artworks Found</h3>
+        <p>Try refining your search keyword or selecting a different category.</p>
+        <button id="reset-filters-btn" class="reset-btn">Reset Filters</button>
+      </div>
+
+      <!-- Main Dynamic Grid -->
+      <div id="gallery-grid" class="gallery-grid">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image Details View">
+    <!-- Overlay Background -->
+    <div class="lightbox-overlay" id="lightbox-overlay-bg"></div>
+
+    <!-- Lightbox Main Frame -->
+    <div class="lightbox-container">
+      
+      <!-- Close Button -->
+      <button class="lightbox-close" id="lightbox-close-btn" aria-label="Close Lightbox" type="button">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Navigation Left Arrow -->
+      <button class="lightbox-nav nav-prev" id="lightbox-prev-btn" aria-label="Previous Image" type="button">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <!-- Media Canvas -->
+      <div class="lightbox-media-wrapper">
+        <img src="" alt="" id="lightbox-image" class="lightbox-img">
+        <div class="lightbox-spinner" id="lightbox-spinner-icon"></div>
+      </div>
+
+      <!-- Navigation Right Arrow -->
+      <button class="lightbox-nav nav-next" id="lightbox-next-btn" aria-label="Next Image" type="button">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
+      <!-- Details Caption Sheet -->
+      <div class="lightbox-caption">
+        <div class="caption-header">
+          <span class="caption-category" id="lightbox-category">Category</span>
+          <span class="caption-counter" id="lightbox-counter">1 of 1</span>
+        </div>
+        <h2 class="caption-title" id="lightbox-title">Artwork Title</h2>
+        <p class="caption-desc" id="lightbox-desc">Detailed descriptions detailing the artistic concepts, inspirations, and rendering techniques behind this curated creation.</p>
+        <div class="caption-footer">
+          <div class="caption-tags" id="lightbox-tags">
+            <!-- Tags rendered by JS -->
+          </div>
+          <!-- Download / View Full size link -->
+          <a href="" download id="lightbox-download-link" class="lightbox-download-btn" aria-label="Download high-resolution image">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Download High-Res</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <p>&copy; 2026 Aether Gallery. Engineered with semantic HTML5, vanilla CSS, and high-performance JavaScript.</p>
+  </footer>
+
+  <!-- Local Script -->
+  <script src="app.js"></script>
+</body>
+</html>
