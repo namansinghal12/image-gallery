@@ -179,3 +179,5 @@ For questions or feedback, please open an issue on GitHub.
 ---
 
 **Aether Gallery** — A curated sanctuary of digital imagery, fluid architecture, and astronomical wonders.
+
+#Yours gallery of nature
